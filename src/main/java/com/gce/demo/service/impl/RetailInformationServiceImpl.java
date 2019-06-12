@@ -78,7 +78,7 @@ public class RetailInformationServiceImpl  implements RetailInformationService{
 		List<LocationTo> locationList = new ArrayList<LocationTo>();
 		NearbySearchRequest req = PlacesApi.nearbySearchQuery(context, new com.google.maps.model.LatLng(lat,lng));
 		try {
-			PlacesSearchResponse resp = req.awaitIgnoreError();
+			PlacesSearchResponse resp = req.radius(20000).awaitIgnoreError();
 			if (resp != null && resp.results != null && resp.results.length > 0) {
 				for (PlacesSearchResult r : resp.results) {
 					PlaceDetails details = PlacesApi.placeDetails(context,r.placeId).awaitIgnoreError();
